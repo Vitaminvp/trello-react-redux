@@ -6,17 +6,19 @@ import Typography from '@material-ui/core/Typography';
 class CardItem extends Component {
     render() {
         return (
-            <Card>
+            <Card style={styles.container}>
                 <CardContent>
                     <Typography variant="body2" component="p">
                         well meaning and kindly.
-                        <br />
-                        {'"a benevolent smile"'}
                     </Typography>
                 </CardContent>
             </Card>
         );
     }
 }
-
+const styles = {
+    container: {
+        marginBottom: 10
+    }
+}
 export default CardItem;
