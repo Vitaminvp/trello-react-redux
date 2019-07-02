@@ -12,7 +12,7 @@ function App({ lists }) {
         {lists.map(list => (
           <List key={list.id} title={list.title} cards={list.cards} />
         ))}
-        <AddButton list/>
+        <AddButton list />
       </section>
     </div>
   );

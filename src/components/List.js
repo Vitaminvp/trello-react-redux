@@ -11,7 +11,7 @@ const styles = {
     minWidth: 300,
     padding: 8,
     marginRight: 10,
-      height: "100%"
+    height: "100%"
   }
 };
 
@@ -24,7 +24,7 @@ class List extends Component {
         {cards.map(card => (
           <CardItem {...card} key={card.id} />
         ))}
-        <AddButton/>
+        <AddButton />
       </div>
     );
   }
