@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import { connect } from "react-redux";
 import CardItem from "./Card";
 import AddButton from "./AddButton";
+import { Droppable } from "react-beautiful-dnd";
 
 const styles = {
   container: {
@@ -19,13 +20,22 @@ class List extends Component {
   render() {
     const { title, cards, listId } = this.props;
     return (
-      <div style={styles.container}>
-        <h4>{title}</h4>
-        {cards.map(card => (
-          <CardItem {...card} key={card.id} />
-        ))}
-        <AddButton listId={listId} />
-      </div>
+      <Droppable droppableId={String(listId)}>
+        {provided => (
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            style={styles.container}
+          >
+            <h4>{title}</h4>
+            {cards.map((card, index) => (
+              <CardItem {...card} key={card.id} id={card.id} index={index} />
+            ))}
+            <AddButton listId={listId} />
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     );
   }
 }
