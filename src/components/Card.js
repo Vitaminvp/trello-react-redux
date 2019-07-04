@@ -6,16 +6,52 @@ import { Draggable } from "react-beautiful-dnd";
 import Icon from "@material-ui/core/Icon";
 import { deleteCard, editCard, sort } from "../actions";
 import { connect } from "react-redux";
+import AddTextArea from "./AddTextArea";
 
 class CardItem extends Component {
-  setIsEditing() {}
+  state = {
+    edit: false,
+    text: this.props.text
+  };
+
+  handleTextareaChange = ({ target: { value } }) => {
+    this.setState(
+      {
+        text: value
+      },
+      () => console.log(this.state.text)
+    );
+  };
+
+  setIsEditing = () => {
+    this.setState({ edit: true });
+  };
+
   handleDeleteCard = () => {
     const { id, listId, deleteCard } = this.props;
     console.log("id, listId, deleteCard", id, listId, deleteCard);
     deleteCard(id, listId);
   };
+
+  handleEditCard = () => {
+    const { id, listId, editCard } = this.props;
+    const { text } = this.state;
+    if (text) {
+      editCard(id, listId, text);
+      this.setState({ edit: false });
+    }
+  };
+
+  hideForm = () => {
+    this.setState({
+      edit: false,
+      text: this.props.text
+    })
+  };
+
   render() {
     const { text, id, index } = this.props;
+    const { edit } = this.state;
     return (
       <Draggable draggableId={String(id)} index={index}>
         {provided => (
@@ -48,10 +84,18 @@ class CardItem extends Component {
                     delete
                   </Icon>
                 </div>
-
-                <Typography variant="body2" component="p">
-                  {text}
-                </Typography>
+                {edit ? (
+                  <AddTextArea
+                    text={this.state.text}
+                    handleTextareaChange={this.handleTextareaChange}
+                    handleAddCard={this.handleEditCard}
+                    hideForm={this.hideForm}
+                  />
+                ) : (
+                  <Typography variant="body2" component="p">
+                    {text}
+                  </Typography>
+                )}
               </CardContent>
             </Card>
           </div>

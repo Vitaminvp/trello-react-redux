@@ -7,10 +7,10 @@ export const addCard = (listId, text) => {
     })
 };
 
-export const editCard = (id, listID, newText) => {
+export const editCard = (id, listId, newText) => {
     return {
         type: ACTION_TYPES.EDIT_CARD,
-        payload: { id, listID, newText }
+        payload: { id, listId, newText }
     };
 };
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import { connect } from "react-redux";
 import CardItem from "./Card";
-import AddButton from "./AddButton";
+import AddForm from "./AddForm";
 import { Droppable } from "react-beautiful-dnd";
 
 const styles = {
@@ -31,7 +31,7 @@ class List extends Component {
             {cards.map((card, index) => (
               <CardItem {...card} key={card.id} listId={listId} id={card.id} index={index} />
             ))}
-            <AddButton listId={listId} list={false}/>
+            <AddForm listId={listId} list={false}/>
             {provided.placeholder}
           </div>
         )}

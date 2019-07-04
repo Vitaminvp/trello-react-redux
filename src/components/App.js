@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import "./App.css";
 import List from "./List";
-import AddButton from "./AddButton";
+import AddForm from "./AddForm";
 import { DragDropContext } from "react-beautiful-dnd";
 import { sort } from "../actions";
 
@@ -39,7 +39,7 @@ class App extends React.Component {
                 listId={list.id}
               />
             ))}
-            <AddButton list={true} />
+            <AddForm list={true} />
           </section>
         </div>
       </DragDropContext>

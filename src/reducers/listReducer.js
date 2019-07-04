@@ -132,6 +132,19 @@ const listReducer = (state = initState, action) => {
       return [...state];
     }
 
+    case ACTION_TYPES.EDIT_CARD: {
+      const { id, listId, newText } = action.payload;
+      const list = state.find(
+          item => item.id === listId
+      );
+      list.cards.map(item => {
+        if(item.id === id){
+          item.text = newText;
+        }
+        return item;
+      });
+      return [...state];
+    }
 
     //
     // case ACTION_TYPES.EDIT_LIST_TITLE: {
