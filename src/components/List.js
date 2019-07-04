@@ -29,7 +29,7 @@ class List extends Component {
           >
             <h4>{title}</h4>
             {cards.map((card, index) => (
-              <CardItem {...card} key={card.id} id={card.id} index={index} />
+              <CardItem {...card} key={card.id} listId={listId} id={card.id} index={index} />
             ))}
             <AddButton listId={listId} />
             {provided.placeholder}

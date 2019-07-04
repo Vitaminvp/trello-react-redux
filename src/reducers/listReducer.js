@@ -9,22 +9,22 @@ const initState = [
         id: 100,
         text:
           "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, explicabo!"
+      },
+      {
+        id: 101,
+        text:
+          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, explicabo!"
+      },
+      {
+        id: 102,
+        text:
+          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, explicabo!"
+      },
+      {
+        id: 103,
+        text:
+          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, explicabo!"
       }
-      // {
-      //   id: 101,
-      //   text:
-      //     "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, explicabo!"
-      // },
-      // {
-      //   id: 102,
-      //   text:
-      //     "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, explicabo!"
-      // },
-      // {
-      //   id: 103,
-      //   text:
-      //     "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, explicabo!"
-      // }
     ]
   },
   {
@@ -62,7 +62,7 @@ const initState = [
 
 const listReducer = (state = initState, action) => {
   switch (action.type) {
-    case ACTION_TYPES.ADD_LIST:
+    case ACTION_TYPES.ADD_LIST: {
       return [
         ...state,
         {
@@ -71,7 +71,9 @@ const listReducer = (state = initState, action) => {
           cards: []
         }
       ];
-    case ACTION_TYPES.ADD_CARD:
+    }
+
+    case ACTION_TYPES.ADD_CARD: {
       const { listId, text } = action.payload;
       return [
         ...state.map(item => {
@@ -81,7 +83,9 @@ const listReducer = (state = initState, action) => {
           return item;
         })
       ];
-    case ACTION_TYPES.DRAG_DONE:
+    }
+
+    case ACTION_TYPES.DRAG_DONE: {
       const {
         droppableIdStart,
         droppableIdEnd,
@@ -115,15 +119,20 @@ const listReducer = (state = initState, action) => {
 
         return newState;
       }
+    }
 
-    // case ACTION_TYPES.DELETE_CARD: {
-    //   const { listID, id } = action.payload;
-    //
-    //   const list = state[listID];
-    //   const newCards = list.cards.filter(cardID => cardID !== id);
-    //
-    //   return { ...state, [listID]: { ...list, cards: newCards } };
-    // }
+    case ACTION_TYPES.DELETE_CARD: {
+      const { listId, id } = action.payload;
+
+      const list = state.find(
+          item => item.id === listId
+      );
+      list.cards = list.cards.filter(card => card.id !== id);
+
+      return [...state];
+    }
+
+
     //
     // case ACTION_TYPES.EDIT_LIST_TITLE: {
     //   const { listID, newTitle } = action.payload;
