@@ -9,7 +9,7 @@ class CardItem extends Component {
             <Card style={styles.container}>
                 <CardContent>
                     <Typography variant="body2" component="p">
-                        well meaning and kindly.
+                        {this.props.text}
                     </Typography>
                 </CardContent>
             </Card>

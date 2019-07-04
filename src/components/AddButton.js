@@ -3,6 +3,8 @@ import Icon from "@material-ui/core/Icon";
 import Card from "@material-ui/core/Card";
 import Textarea from "@material-ui/core/InputBase/Textarea";
 import { Button } from "@material-ui/core";
+import { addList, addCard } from "../actions";
+import { connect } from "react-redux";
 
 class AddButton extends Component {
   state = {
@@ -16,8 +18,8 @@ class AddButton extends Component {
       : "Enter a title for this card ...";
     const buttonTitle = list ? "Add list" : "Add card";
     return (
-      <>
-        <Card>
+      <div>
+        <Card style={{ display: "flex", flexDirection: "column" }}>
           <Textarea
             style={styles.textArea}
             autoFocus
@@ -27,13 +29,32 @@ class AddButton extends Component {
           />
         </Card>
         <div style={styles.formButtonGroup}>
-          <Button variant="contained" style={styles.button}>
+          <Button
+            variant="contained"
+            style={styles.button}
+            onMouseDown={list ? this.handleAddList : this.handleAddCard} // onMouseDown fires before onBlur
+          >
             {buttonTitle}
           </Button>
           <Icon style={styles.close}>close</Icon>
         </div>
-      </>
+      </div>
     );
+  };
+
+  handleAddCard = () => {
+    const { text } = this.state;
+    if (text) {
+      this.props.addCard(this.props.listId, text);
+      this.setState({ test: "" });
+    }
+  };
+  handleAddList = () => {
+    const { text } = this.state;
+    if (text) {
+      this.props.addList(text);
+      this.setState({ test: "" });
+    }
   };
   showForm = () => {
     this.setState({ formVisible: true });
@@ -54,14 +75,14 @@ class AddButton extends Component {
     const buttonText = list ? "Add another list" : "Add another card";
     const buttonTextOpacity = list ? 1 : 0.5;
     const buttonTextColor = list ? "white" : "inherit";
-    const buttonTextBackground = list ? "rgba(0,0,0, 0.15)" : "inherit";
+    const buttonTextBackground = list ? "rgba(0, 0, 0, 0.15)" : "inherit";
     return (
       <div
         style={{
           ...styles.buttonWrapper,
-          buttonTextOpacity,
-          buttonTextColor,
-          buttonTextBackground
+          opacity: buttonTextOpacity,
+          color: buttonTextColor,
+          backgroundColor: buttonTextBackground
         }}
         onClick={this.showForm}
       >
@@ -108,4 +129,13 @@ const styles = {
     marginTop: 10
   }
 };
-export default AddButton;
+
+const mapDispatchToProps = {
+  addList,
+  addCard
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(AddButton);

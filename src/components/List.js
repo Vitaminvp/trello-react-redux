@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import CardItem from "./Card";
 import AddButton from "./AddButton";
 
@@ -17,21 +17,22 @@ const styles = {
 
 class List extends Component {
   render() {
-    const { title, cards } = this.props;
+    const { title, cards, listId } = this.props;
     return (
       <div style={styles.container}>
         <h4>{title}</h4>
         {cards.map(card => (
           <CardItem {...card} key={card.id} />
         ))}
-        <AddButton />
+        <AddButton listId={listId} />
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {};
-}
+// function mapStateToProps(state) {
+//   return {};
+// }
 
-export default connect(mapStateToProps)(List);
+// export default connect(mapStateToProps)(List);
+export default List;
