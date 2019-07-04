@@ -39,7 +39,7 @@ class App extends React.Component {
                 listId={list.id}
               />
             ))}
-            <AddButton list />
+            <AddButton list={true} />
           </section>
         </div>
       </DragDropContext>

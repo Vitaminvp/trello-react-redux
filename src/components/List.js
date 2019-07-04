@@ -31,7 +31,7 @@ class List extends Component {
             {cards.map((card, index) => (
               <CardItem {...card} key={card.id} listId={listId} id={card.id} index={index} />
             ))}
-            <AddButton listId={listId} />
+            <AddButton listId={listId} list={false}/>
             {provided.placeholder}
           </div>
         )}
